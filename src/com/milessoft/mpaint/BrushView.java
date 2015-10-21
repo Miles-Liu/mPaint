@@ -20,6 +20,8 @@ public class BrushView extends View {
 	public LayoutParams params;
 	public LayoutParams params2;
 	private ColorPickerDialog dialog;
+	
+	
 
 
 	public BrushView(final Context context) {
@@ -28,7 +30,7 @@ public class BrushView extends View {
 		brush.setColor(Color.BLUE);
 		brush.setStyle(Paint.Style.STROKE);
 		brush.setStrokeJoin(Paint.Join.ROUND);
-		brush.setStrokeWidth(10f);
+		brush.setStrokeWidth(5f);
 //		 params = new LayoutParams(400 ,
 //		 LayoutParams.WRAP_CONTENT);
 		params = new LayoutParams(new LinearLayout.LayoutParams(100,
