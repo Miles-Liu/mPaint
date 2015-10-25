@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnKeyListener;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -24,8 +25,8 @@ public class MainActivity extends Activity {
 	AlertDialog menuDialog;// menu菜单Dialog
 	GridView menuGrid;
 	View menuView;
-	private final int ITEM_SEARCH = 0;// 搜索
-	private final int ITEM_FILE_MANAGER = 1;// 文件管理
+	private final int ITEM_Clear = 0;// 搜索
+	private final int ITEM_Color = 1;// 文件管理
 	private final int ITEM_DOWN_MANAGER = 2;// 下载管理
 	private final int ITEM_FULLSCREEN = 3;// 全屏
 	private final int ITEM_MORE = 11;// 菜单
@@ -38,7 +39,7 @@ public class MainActivity extends Activity {
 			R.drawable.menu_nightmode, R.drawable.menu_refresh,
 			R.drawable.menu_more };
 	/** 菜单文字 **/
-	String[] menu_name_array = { "搜索", "文件管理", "下载管理", "全屏", "网址", "书签",
+	String[] menu_name_array = { "清空", "颜色", "下载管理", "全屏", "网址", "书签",
 			"加入书签", "分享页面", "退出", "夜间模式", "刷新", "更多" };
 	/** 菜单图片2 **/
 	int[] menu_image_array2 = { R.drawable.menu_auto_landscape,
@@ -70,11 +71,9 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 //		 setContentView(R.layout.activity_main);
-		BrushView view = new BrushView(this);
+		final BrushView view = new BrushView(this);
 		setContentView(view);
-		addContentView(view.btnEraseAll, view.params);
-		addContentView(view.btnColor, view.params2);
-
+		
 		menuView = View.inflate(this, R.layout.gridview_menu, null);
 		// 创建AlertDialog
 		menuDialog = new AlertDialog.Builder(this).create();
@@ -95,11 +94,13 @@ public class MainActivity extends Activity {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				switch (arg2) {
-				case ITEM_SEARCH:// 搜索
-
+				case ITEM_Clear:// 清空
+					view.path.reset();
+					// invalidate the view
+					view.postInvalidate();
 					break;
-				case ITEM_FILE_MANAGER:// 文件管理
-
+				case ITEM_Color:// 颜色
+					view.chooseColor(MainActivity.this);
 					break;
 				case ITEM_DOWN_MANAGER:// 下载管理
 
