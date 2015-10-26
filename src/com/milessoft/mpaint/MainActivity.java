@@ -27,8 +27,8 @@ public class MainActivity extends Activity {
 	View menuView;
 	private final int ITEM_Clear = 0;// 搜索
 	private final int ITEM_Color = 1;// 文件管理
-	private final int ITEM_DOWN_MANAGER = 2;// 下载管理
-	private final int ITEM_FULLSCREEN = 3;// 全屏
+	private final int ITEM_Add_Stroke = 2;// 下载管理
+	private final int ITEM_Minus_Stroke = 3;// 全屏
 	private final int ITEM_MORE = 11;// 菜单
 	/** 菜单图片 **/
 	int[] menu_image_array = { R.drawable.menu_search,
@@ -39,7 +39,7 @@ public class MainActivity extends Activity {
 			R.drawable.menu_nightmode, R.drawable.menu_refresh,
 			R.drawable.menu_more };
 	/** 菜单文字 **/
-	String[] menu_name_array = { "清空", "颜色", "下载管理", "全屏", "网址", "书签",
+	String[] menu_name_array = { "清空", "颜色", "+", "-", "网址", "书签",
 			"加入书签", "分享页面", "退出", "夜间模式", "刷新", "更多" };
 	/** 菜单图片2 **/
 	int[] menu_image_array2 = { R.drawable.menu_auto_landscape,
@@ -102,11 +102,11 @@ public class MainActivity extends Activity {
 				case ITEM_Color:// 颜色
 					view.chooseColor(MainActivity.this);
 					break;
-				case ITEM_DOWN_MANAGER:// 下载管理
-
+				case ITEM_Add_Stroke:// 下载管理
+					view.addStrokeWidth();
 					break;
-				case ITEM_FULLSCREEN:// 全屏
-
+				case ITEM_Minus_Stroke:// 全屏
+					view.minusStrokeWidth();	
 					break;
 				case ITEM_MORE:// 翻页
 					if (isMore) {

@@ -18,21 +18,32 @@ public class BrushView extends View {
 	public LayoutParams params;
 	public LayoutParams params2;
 	private ColorPickerDialog dialog;
-	
-	Context context;
+	public float strokeWidth;
 
+	Context context;
 
 	public BrushView(final Context context) {
 		super(context);
+		strokeWidth = 5f;
 		brush.setAntiAlias(true);
 		brush.setColor(Color.BLUE);
 		brush.setStyle(Paint.Style.STROKE);
 		brush.setStrokeJoin(Paint.Join.ROUND);
-		brush.setStrokeWidth(5f);
+		brush.setStrokeWidth(strokeWidth);
 	}
 
-	public void chooseColor(Context context){
-		
+	public void addStrokeWidth() {
+		strokeWidth ++;
+		brush.setStrokeWidth(strokeWidth);
+	}
+
+	public void minusStrokeWidth() {
+		strokeWidth --;
+		if (strokeWidth < 0) strokeWidth = 1f;
+		brush.setStrokeWidth(strokeWidth);
+	}
+	public void chooseColor(Context context) {
+
 		dialog = new ColorPickerDialog(context,
 				new ColorPickerDialog.OnColorChangedListener() {
 
@@ -43,9 +54,8 @@ public class BrushView extends View {
 				}, Color.BLUE);
 		dialog.show();
 	}
-	
+
 	@Override
-	
 	public boolean onTouchEvent(MotionEvent event) {
 		float pointX = event.getX();
 		float pointY = event.getY();
