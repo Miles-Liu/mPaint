@@ -31,8 +31,8 @@ public class MainActivity extends Activity {
 	private final int ITEM_Minus_Stroke = 3;// È«ÆÁ
 	private final int ITEM_MORE = 11;// ²Ëµ¥
 	/** ²Ëµ¥Í¼Æ¬ **/
-	int[] menu_image_array = { R.drawable.menu_search,
-			R.drawable.menu_filemanager, R.drawable.menu_downmanager,
+	int[] menu_image_array = { R.drawable.menu_delete,
+			R.drawable.menu_color, R.drawable.menu_downmanager,
 			R.drawable.menu_fullscreen, R.drawable.menu_inputurl,
 			R.drawable.menu_bookmark, R.drawable.menu_bookmark_sync_import,
 			R.drawable.menu_sharepage, R.drawable.menu_quit,
