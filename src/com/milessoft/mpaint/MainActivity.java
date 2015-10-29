@@ -6,13 +6,16 @@ import java.util.HashMap;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.DialogInterface.OnKeyListener;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
@@ -29,11 +32,12 @@ public class MainActivity extends Activity {
 	private final int ITEM_Color = 1;// 文件管理
 	private final int ITEM_Add_Stroke = 2;// 下载管理
 	private final int ITEM_Minus_Stroke = 3;// 全屏
+	private final int ITEM_FullScreen = 4;// 全屏
 	private final int ITEM_MORE = 11;// 菜单
 	/** 菜单图片 **/
 	int[] menu_image_array = { R.drawable.menu_delete,
 			R.drawable.menu_color, R.drawable.menu_downmanager,
-			R.drawable.menu_fullscreen, R.drawable.menu_inputurl,
+			R.drawable.menu_fullscreen, R.drawable.menu_fullscreen,
 			R.drawable.menu_bookmark, R.drawable.menu_bookmark_sync_import,
 			R.drawable.menu_sharepage, R.drawable.menu_quit,
 			R.drawable.menu_nightmode, R.drawable.menu_refresh,
@@ -108,6 +112,9 @@ public class MainActivity extends Activity {
 				case ITEM_Minus_Stroke:// 全屏
 					view.minusStrokeWidth();	
 					break;
+				case ITEM_FullScreen:
+					fullScreenChange();
+					break;
 				case ITEM_MORE:// 翻页
 					if (isMore) {
 						menuGrid.setAdapter(getMenuAdapter(menu_name_array2,
@@ -165,4 +172,22 @@ public class MainActivity extends Activity {
 		// }
 		return super.onOptionsItemSelected(item);
 	}
+	public void fullScreenChange() {
+		SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+		boolean fullScreen = mPreferences.getBoolean("fullScreen", false);
+		WindowManager.LayoutParams attrs = getWindow().getAttributes(); 
+		System.out.println("fullScreen的值:" + fullScreen);
+		if (fullScreen) {
+		attrs.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN); 
+		getWindow().setAttributes(attrs); 
+		//取消全屏设置
+		getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+		mPreferences.edit().putBoolean("fullScreen", false).commit() ;
+		} else {
+		attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN; 
+		getWindow().setAttributes(attrs); 
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS); 
+		mPreferences.edit().putBoolean("fullScreen", true).commit();
+		}
+		}
 }

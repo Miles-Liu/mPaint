@@ -1,15 +1,16 @@
 package com.milessoft.mpaint;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.preference.PreferenceManager;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.Button;
-import android.widget.LinearLayout;
+import android.view.WindowManager;
 
 public class BrushView extends View {
 
@@ -79,4 +80,6 @@ public class BrushView extends View {
 	protected void onDraw(Canvas canvas) {
 		canvas.drawPath(path, brush);
 	}
+	
+	
 }
